@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::namespace('Api')->group(function(){
+  Route::get('/movies', 'MoviesController@index');
+  Route::get('/movies/{id}', 'MoviesController@show');
+  Route::post('/movies', 'MoviesController@store');
+  // In entrambi i casi mettiamo post al posto di put o delete perchè altrimenti dobbiamo utilizzare l hidden _method put all'iterno di postman
+  Route::post('/movies/{id}', 'MoviesController@update');
+  Route::post('/movies/{id}/delete', 'MoviesController@destroy');
+});
