@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::namespace('Api')->group(function(){
+Route::namespace('Api')->middleware('auth:api')->group(function(){
   Route::get('/movies', 'MoviesController@index');
   Route::get('/movies/{id}', 'MoviesController@show');
   Route::post('/movies', 'MoviesController@store');
